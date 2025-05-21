@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { supabase } from './lib/supabase';
 import Layout from './components/Layout';
 import Login from './pages/Login';
+import ResetPassword from './pages/ResetPassword';
 import TimeTracker from './pages/TimeTracker';
 import Timesheet from './pages/Timesheet';
 import Projects from './pages/Projects';
@@ -127,6 +128,13 @@ function App() {
         />
         
         <Route 
+          path="/reset-password" 
+          element={
+            <ResetPassword />
+          }
+        />
+        
+        <Route 
           path="/setup" 
           element={
             session ? (
@@ -150,7 +158,8 @@ function App() {
         >
           <Route index element={<TimeTracker />} />
           <Route path="timesheet" element={<Timesheet />} />
-          <Route path="timesheet/edit/:id" element={<Timesheet />} />
+          <Route path="timesheet/edit/:id" element={<Timesheet mode="edit" />} />
+          <Route path="timesheet/view/:id" element={<Timesheet mode="view" />} />
           <Route path="timesheet/new" element={<Timesheet />} />
           <Route path="projects" element={<Projects />} />
           <Route path="projects/:id" element={<ProjectDetail />} />
@@ -158,7 +167,6 @@ function App() {
           <Route path="team" element={<Team />} />
           <Route path="tasks" element={<Tasks />} />
           <Route path="settings" element={<Settings user={user} />} />
-          <Route path="timesheet/view/:id" element={<Timesheet />} />
         </Route>
         
         {/* Fallback route */}
